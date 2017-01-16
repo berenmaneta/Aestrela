@@ -33,7 +33,7 @@ namespace ConsoleApplicationTeste1
             while (abertos.Count > 0)
             {
                 Ciclos++;
-                No currentNode = GetBestNodeFromabertos(abertos);
+                No currentNode = SelecionaMelhorNoAberto(abertos);
 
                 abertos.Remove(currentNode);
                 fechados.Add(currentNode);
@@ -50,7 +50,7 @@ namespace ConsoleApplicationTeste1
                     successorNode.H = _calculaValorH.Executar(noObjetivo, successorNode);
                     successorNode.F = successorNode.G + successorNode.H;
 
-                    if (abertosHasBetterNode(successorNode, abertos))
+                    if (melhorNoAberto(successorNode, abertos))
                         continue;
 
                     abertos.Add(successorNode);
@@ -60,12 +60,12 @@ namespace ConsoleApplicationTeste1
             return null;
         }
 
-        private static No GetBestNodeFromabertos(IEnumerable<No> abertos)
+        private static No SelecionaMelhorNoAberto(IEnumerable<No> abertos)
         {
             return abertos.OrderBy(n => n.F).First();
         }
 
-        private static bool abertosHasBetterNode(No successor, IEnumerable<No> list)
+        private static bool melhorNoAberto(No successor, IEnumerable<No> list)
         {
             return list.FirstOrDefault(n => n.G.Equals(successor.G)
                     && n.F < successor.F) != null;
