@@ -86,7 +86,10 @@ namespace ConsoleApplicationTeste1
                 }
 
                 Console.WriteLine("");
-                Console.WriteLine("{0} passos", passo);
+                if(passo == 2)
+                    Console.WriteLine("{0} movimento", passo - 1);
+                else if(passo > 2)
+                    Console.WriteLine("{0} movimentos", passo - 1);
             }
             else
             {
